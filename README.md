@@ -23,14 +23,24 @@ test_directory='data/inaturalist_12K/val'
 
 
 5)  train.py 
-  	training models
+  	
+	training models
+	
 	run: python train.py --epochs=20 --freeze_cnn=False --learning_rate=0.001 --model_name=inception --optimizer=sgd --weight_decay=0.01
+	
 	or run :  python train.py	
+	
 	num_linear is number of neurons in linear layer
 
-CNN.py - contains code for nueral net in pytorch
-dataLoader.py  : data loading using DataLoader class
+CNN.py - 
+	
+	contains code for nueral net in pytorch
+dataLoader.py  : 
+	
+	data loading using DataLoader class
 
-pretrained_model.py  :  implementation of 6 pretrained models
+pretrained_model.py  :  
+	
+	implementation of 6 pretrained models
 
 results directory contains , images of guided backpropagation.
