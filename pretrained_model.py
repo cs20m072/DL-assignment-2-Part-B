@@ -1,11 +1,8 @@
 
-import configuration
 import torchvision
+from torch.nn import Linear, ReLU, Sequential, Conv2d, Dropout, BatchNorm1d
 
-from torch.nn import Linear, ReLU, Sequential, Conv2d, MaxPool2d, Module, BatchNorm2d, \
-    Dropout, Sigmoid, Tanh, BatchNorm1d, Flatten
-
-
+import configuration
 
 
 def getLinearLayer(classifier_input):

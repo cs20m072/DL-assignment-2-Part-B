@@ -1,3 +1,4 @@
+import argparse
 import torch
 
 import wandb
@@ -25,12 +26,7 @@ momentum = 'momentum'
 nesterov = 'nesterov'
 rms = 'rmsprop'
 
-# CNN network configuration for each layer
-values = [[32, 32, 32, 32, 32], [64, 64, 64, 64, 64], [32, 64, 64, 64, 128], [64, 64, 64, 128, 128],
-          [32, 32, 32, 64, 64], [32, 32, 32, 64, 128],
-          [64, 64, 32, 32, 32], [64, 32, 32, 32, 32], [64, 64, 64, 32, 32]]
-
-no_conv_filters = values[0]
+no_conv_filters = [32,32,32,32,32]
 conv_filters = [3, 3, 3, 3, 3]  # size of filter 3*3
 activation_list = [relu, relu, relu, relu, relu]
 conv_strides = [1, 1, 1, 1, 1]
@@ -52,7 +48,7 @@ learning_rate = 0.01
 batch_size = 32
 gradient_accumalation = 2
 shuffle = True
-epochs = 10
+epochs = 3
 optimizer = adam
 loss = 'cross-entropy'
 momentum = 0.9
@@ -67,29 +63,26 @@ num_workers = 4
 
 # pretrained model
 model_name = "resnet"
+freeze_cnn=False
+
+parser = argparse.ArgumentParser("dl assignment 2")
+parser.add_argument("--epochs", required = False , type=int, default= epochs)
+parser.add_argument("--learning_rate", required = False, type=float, default=learning_rate)
+
+parser.add_argument("--optimizer", required = False, default=optimizer)
+parser.add_argument("--weight_decay", required = False,type=float, default=weight_decay)
+
+parser.add_argument("--model_name", required = False, default= model_name)
+parser.add_argument("--freeze_cnn", required = False, default= freeze_cnn , type=bool)
+
+args = vars(parser.parse_args())
 
 
 
-hyperparameter_defaults = dict(
-    model_name="inception",
-    freeze_cnn=True,
-    epochs=20,
-    learning_rate=0.0001,
-    optimizer="sgd",
-    weight_decay=0.001
-)
+learning_rate=args["learning_rate"]
+optimizer=args["optimizer"]
+weight_decay=args["weight_decay"]
+epochs =args["epochs"]
 
-wandb.init(config=hyperparameter_defaults, project="cnn-assignment-2-transfer-learning")
-config = wandb.config
-
-
-model_name=config.model_name
-freeze_cnn=config.freeze_cnn
-
-
-epochs=config.epochs
-learning_rate=config.learning_rate
-optimizer=config.optimizer
-weight_decay=config.weight_decay
-
-
+model_name = args["model_name"]
+freeze_cnn = args["freeze_cnn"]

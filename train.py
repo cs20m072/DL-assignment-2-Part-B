@@ -9,7 +9,6 @@ import torch
 from torch.nn import CrossEntropyLoss
 from torch.cuda.amp import GradScaler, autocast
 import configuration
-import wandb
 import pretrained_model
 
 
@@ -109,7 +108,6 @@ def train(epoch):
                   "val_loss:": avg_loss_val / len(validation_dataloader),
                   "train_loss:": avg_loss_train / len(train_dataloader)}
         print(metric)
-        wandb.log(metric)
 
 
 if __name__ == '__main__':
