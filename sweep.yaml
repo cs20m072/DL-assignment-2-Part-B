@@ -1,0 +1,20 @@
+program: train.py
+method: random
+metric:
+  goal: maximize
+  name: val_accuracy
+parameters:
+  model_name :
+   values : ["squeeznet", "alexnet","densenet","vgg","resnet","inception"]
+  learning_rate:
+    values : [0.0001, 0.001, 0.01]
+  weight_decay:
+    values : [0.0001, 0.001, 0.01]
+  freeze_cnn :
+    values: [True, False]
+
+  optimizer:
+    values: ["sgd" , "adam"]
+
+  epochs:
+    values : [20]
